@@ -1,0 +1,84 @@
+text,label
+"administration",Project Management
+"agile",Project Management
+"feasibility analysis",Project Management
+"finance",Project Management
+"leader",Project Management
+"leadership",Project Management
+"management",Project Management
+"milestones",Project Management
+"planning",Project Management
+"project",Project Management
+"risk management",Project Management
+"schedule",Project Management
+"stakeholders",Project Management
+"teamwork",Project Management
+"communication",Project Management
+"organization",Project Management
+"research",Project Management
+"public speaking",Project Management
+"problem solving",Project Management
+"negotiation",Project Management
+"team management",Project Management
+"time management",Project Management
+"adaptability",Project Management
+"policy knowledge",Project Management
+"reporting",Project Management
+"technical",Project Management
+"motivation",Project Management
+
+"flask",Backend
+"laravel",Backend
+"django",Backend
+"ruby on rails",Backend
+"express.js",Backend
+"codeigniter",Backend
+"golang",Backend
+"mysql",Backend
+"postgres",Backend
+"mongodb",Backend
+"relational database",Backend
+"non relational database",Backend
+"nosql",Backend
+"application programming interface",Backend
+"object oriented programming",Backend
+
+"react",Frontend
+"angular",Frontend
+"vue.js",Frontend
+"svelte",Frontend
+"jquery",Frontend
+"backbone.js",Frontend
+"ember.js",Frontend
+"semantic-ui",Frontend
+"html",Frontend
+"css",Frontend
+"bootstrap",Frontend
+"javascript",Frontend
+"jquery",Frontend
+"xml",Frontend
+"dom manipulation",Frontend
+"json",Frontend
+
+"networking",Devops
+"tcp",Devops
+"udp",Devops
+"microsoft azure",Devops
+"amazon web services",Devops
+"alibaba cloud",Devops
+"google cloud",Devops
+"docker",Devops
+"kubernetes",Devops
+"virtual machine",Devops
+"cloud computing",Devops
+"security",Devops
+"linux",Devops
+"ubuntu",Devops
+"debian",Devops
+"arch linux",Devops
+"kali linux",Devops
+"automation",Devops
+"containers",Devops
+"operations",Devops
+"testing",Devops
+"troubleshooting",Devops
