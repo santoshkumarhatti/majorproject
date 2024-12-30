@@ -8,11 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body class="bg-dark text-light">
     <div class="container">
         <!-- Button to Download Entire Page as PDF -->
         <button class="btn btn-primary my-4" id="downloadPDF">Download as PDF</button>
+
+        <!-- Button to Download Data as Excel -->
+        <button class="btn btn-success my-4" id="downloadExcel">Download as Excel</button>
 
         <h1 class="mt-5">Screening Results</h1>
         {% if resumes %}
@@ -20,15 +24,13 @@
             {% for resume in resumes %}
                 <div class="card mb-4">
                     <div class="card-header">
-                        <!-- Display the PDF name as the title for each resume -->
                         <h5 style="color: black;">Resume: {{ resume['filename'] }}</h5>
                     </div>
                     <div class="card-body">
                         <p><strong style="color: black;">Job Role:</strong> <span style="color: black;">{{ resume['role'] }}</span></p>
-                        <p><strong style="color: black;">Extracted Email Domains:</strong> <span style="color: black;">{{ resume['email_domains'] }}</span></p>
+                        <p><strong style="color: black;">Email:</strong> <span style="color: black;">{{ resume['email_domains'] }}</span></p>
 
-
-                        <!-- Check each skill and compare its value with the threshold -->
+                        <!-- Skill Table -->
                         <table class="table table-bordered text-white">
                             <thead class="bg-lightblue">
                                 <tr>
@@ -64,7 +66,7 @@
                             </tbody>
                         </table>
 
-                        <!-- Display Skills Matching -->
+                        <!-- Skills List -->
                         <p><strong>Other Skills Matching:</strong></p>
                         <ul>
                             {% for skill, skill_details in resume['skills'].items() %}
@@ -72,7 +74,7 @@
                             {% endfor %}
                         </ul>
 
-                        <!-- Bar chart for all skills -->
+                        <!-- Skill Chart -->
                         <h6>Skill Distribution for {{ resume['filename'] }}:</h6>
                         <canvas id="skillChart{{ loop.index }}" width="400" height="200"></canvas>
                         <script>
@@ -80,10 +82,10 @@
                             var skillChart = new Chart(ctx, {
                                 type: 'bar',
                                 data: {
-                                    labels: [{% for skill in resume['skills'] %}'{{ skill }}'{% if not loop.last %}, {% endif %}{% endfor %}],  // All skill names
+                                    labels: [{% for skill in resume['skills'] %}'{{ skill }}'{% if not loop.last %}, {% endif %}{% endfor %}],
                                     datasets: [{
                                         label: 'Skill Probability (%)',
-                                        data: [{% for skill, value in resume['skills'].items() %}{{ value | round(2) }}{% if not loop.last %}, {% endif %}{% endfor %}],  // All skill values rounded to 2 decimals
+                                        data: [{% for skill, value in resume['skills'].items() %}{{ value | round(2) }}{% if not loop.last %}, {% endif %}{% endfor %}],
                                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                                         borderColor: 'rgba(54, 162, 235, 1)',
                                         borderWidth: 1
@@ -109,20 +111,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Function to download the entire page as PDF
-        document.getElementById('downloadPDF').addEventListener('click', function () {
-            const { jsPDF } = window.jspdf;
+    // Function to download data as Excel
+    document.getElementById('downloadExcel').addEventListener('click', function () {
+        const resumesData = [
+            {% for resume in resumes %}
+                {% if resume['skills'][resume['role']] >= threshold %}
+                    {
+                        Email: '{{ resume["email_domains"] }}',
+                        JobRole: '{{ resume["role"] }}',
+                        Eligibility: 'Eligible'
+                    },
+                {% endif %}
+            {% endfor %}
+        ];
 
-            // Create a new PDF document
-            const doc = new jsPDF();
+        // Create a worksheet and workbook from the resumesData
+        const ws = XLSX.utils.json_to_sheet(resumesData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Screening Results');
 
-            // Use html2canvas to capture the content of the page
-            html2canvas(document.body).then(function (canvas) {
-                const imgData = canvas.toDataURL('image/png');
-                doc.addImage(imgData, 'PNG', 10, 10);
-                doc.save('screening-results.pdf');
-            });
-        });
-    </script>
+        // Write the workbook to a file and trigger the download
+        XLSX.writeFile(wb, 'screening-results.xlsx');
+    });
+</script>
+
 </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Email with PDF</title>
+</head>
+<body>
+    <h1>Send Screening Results as Email</h1>
+    <button id="sendEmailBtn">Send Email</button>
+
+    <script>
+        document.getElementById('sendEmailBtn').addEventListener('click', function() {
+            const recipientEmail = 'recipient@example.com'; // Add the recipient email address
+            const subject = 'Screening Results Report';
+            const body = 'Please find attached the screening results report.';
+
+            // Create the FormData object for the attachment (e.g., PDF)
+            const formData = new FormData();
+            formData.append("file", yourPdfBlob, "screening-results.pdf");
+
+            fetch('https://api.sendinblue.com/v3/smtp/email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'api-key': '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' // Replace with your actual API key
+                },
+                body: JSON.stringify({
+                    sender: { email: 'sndsanthosh74@gmail.com' }, // Your email address
+                    to: [{ email: recipientEmail }],
+                    subject: subject,
+                    htmlContent: body,
+                    attachment: [{
+                        content: yourPdfBlob.toString('base64'), // Convert your PDF Blob to base64
+                        name: 'screening-results.pdf'
+                    }]
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Email sent successfully:', data);
+                alert('Email sent successfully!');
+            })
+            .catch(error => {
+                console.error('Error sending email:', error);
+                alert('Failed to send email.');
+            });
+        });
+    </script>
+</body>
+</html>
