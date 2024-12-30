@@ -41,6 +41,21 @@ def extract_text_from_pdf(filepath):
 def is_pdf_empty(filepath):
     text = extract_text_from_pdf(filepath)
     return not text.strip()
+
+
+import re
+
+def extract_emails(text):
+    # Regex to match complete email addresses
+    email_regex = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    
+    # Extract all email addresses
+    emails = re.findall(email_regex, text)
+    
+    return emails
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -67,6 +82,8 @@ def upload_file():
                 # Extract text from the resume
                 text = extract_text_from_pdf(file_path)
 
+                email_domains = extract_emails(text)
+
                 # Clean resume and predict skills
                 cleaned_text = clean_resume(text)
                 skills = predict_skills(cleaned_text, threshold)  # Pass threshold to skills prediction
@@ -85,7 +102,8 @@ def upload_file():
                         'skills': skills,
                         'probability': probability,
                         'max_skill_name': max_skill_name,  # Add max skill information
-                        'max_skill_value': max_skill_value  # Add max skill value
+                        'max_skill_value': max_skill_value,  # Add max skill value
+                        'email_domains': ', '.join(email_domains)
                     })
 
         if not resumes:
