@@ -119,11 +119,15 @@
                     {
                         Email: '{{ resume["email_domains"] }}',
                         JobRole: '{{ resume["role"] }}',
-                        Eligibility: 'Eligible'
+                        Eligibility: 'Eligible',
+                        SkillPercentage: '{{ resume["skills"][resume["role"]] | round(2) }}' // Add the skill percentage for the role
                     },
                 {% endif %}
             {% endfor %}
         ];
+
+        // Sort the data by SkillPercentage in descending order
+        resumesData.sort((a, b) => b.SkillPercentage - a.SkillPercentage);
 
         // Create a worksheet and workbook from the resumesData
         const ws = XLSX.utils.json_to_sheet(resumesData);
@@ -134,6 +138,7 @@
         XLSX.writeFile(wb, 'screening-results.xlsx');
     });
 </script>
+
 
 </body>
 </html>
