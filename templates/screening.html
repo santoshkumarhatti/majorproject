@@ -84,16 +84,8 @@
                             </tbody>
                         </table>
 
-                        <!-- Skills List -->
-                        <p><strong>Other Skills Matching:</strong></p>
-                        <ul>
-                            {% for skill, skill_details in resume['skills'].items() %}
-                                <li><strong>{{ skill }}:</strong> {{ skill_details | round(2) }}%</li>
-                            {% endfor %}
-                        </ul>
 
                         <!-- Skill Chart -->
-                        <h6>Skill Distribution for {{ resume['filename'] }}:</h6>
                         <canvas id="skillChart{{ loop.index }}" width="400" height="200"></canvas>
                         <script>
                             var ctx = document.getElementById('skillChart{{ loop.index }}').getContext('2d');
