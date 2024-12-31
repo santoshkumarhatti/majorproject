@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
 import joblib
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -41,6 +44,34 @@ def extract_text_from_pdf(filepath):
 def is_pdf_empty(filepath):
     text = extract_text_from_pdf(filepath)
     return not text.strip()
+
+SMTP_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
+EMAIL_ADDRESS = '0422msrinivasa@gmail.com'  # Replace with your email
+EMAIL_PASSWORD = 'zmhi qqvy aepo hiny'  # Replace with your email app password
+
+
+def send_email(to_email, subject, body):
+    try:
+        # Create the email object
+        msg = MIMEMultipart()
+        msg['From'] = EMAIL_ADDRESS
+        msg['To'] = to_email
+        msg['Subject'] = subject
+
+        # Attach the email body
+        msg.attach(MIMEText(body, 'plain'))
+
+        # Connect to the server and send the email
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()  # Secure the connection
+        server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+        server.send_message(msg)
+        server.quit()
+
+        print(f"Email sent to {to_email}")
+    except Exception as e:
+        print(f"Error sending email: {e}")
 
 
 import re
@@ -76,7 +107,7 @@ def upload_file():
                 file.save(file_path)
 
                 if is_pdf_empty(file_path):
-                    flash(f'{filename} is empty or black.', 'warning')
+                    flash(f'{filename} is empty or blank.', 'warning')
                     continue
 
                 # Extract text from the resume
@@ -95,7 +126,7 @@ def upload_file():
                     # Simplified probability calculation based on the average of all skills
                     probability = sum(skills.values()) / len(skills)
 
-                        # Only include resumes with a probability >= threshold
+                    # Only include resumes with a probability >= threshold
                     resumes.append({
                         'filename': filename,
                         'role': job_role,
@@ -105,6 +136,22 @@ def upload_file():
                         'max_skill_value': max_skill_value,  # Add max skill value
                         'email_domains': ', '.join(email_domains)
                     })
+                    # Send email notification (optional)
+                    if email_domains:  # Send to the first email found in the text
+                        if probability >= threshold / 100:  # Check if probability meets threshold
+                            eligibility_message = "Congratulations! Based on the submitted resume, you are eligible for the role."
+                        else:
+                            eligibility_message = "Unfortunately, based on the submitted resume, you do not meet the eligibility criteria for this role."
+
+                    send_email(
+                        to_email=email_domains[0],
+                        subject=f"Application Received for {job_role}",
+                        body=f"Dear Applicant,\n\n"
+                        f"Your application for the role of {job_role} has been successfully received.\n\n"
+                        f"{eligibility_message}\n\n"
+                        f"Thank you for applying!"
+    )
+
 
         if not resumes:
             flash('No resumes met the threshold criteria', 'warning')
