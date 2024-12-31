@@ -137,11 +137,13 @@ def upload_file():
                         'email_domains': ', '.join(email_domains)
                     })
                     # Send email notification (optional)
-                    if email_domains:  # Send to the first email found in the text
-                        if probability >= threshold / 100:  # Check if probability meets threshold
+                    if job_role in skills:  # Ensure the skill exists for the selected job role
+                        skill_value = skills[job_role]  # Get the skill value for the specific role
+                        if skill_value >= threshold:  # Check if this skill meets the threshold
                             eligibility_message = "Congratulations! Based on the submitted resume, you are eligible for the role."
                         else:
-                            eligibility_message = "Unfortunately, based on the submitted resume, you do not meet the eligibility criteria for this role."
+                            eligibility_message = f"Unfortunately, based on the submitted resume, you do not meet the eligibility criteria for the {job_role} role."
+
 
                     send_email(
                         to_email=email_domains[0],
@@ -150,7 +152,9 @@ def upload_file():
                         f"Your application for the role of {job_role} has been successfully received.\n\n"
                         f"{eligibility_message}\n\n"
                         f"Thank you for applying!"
-    )
+                        )
+            else:
+                flash(f'{file.filename} is not a valid PDF file.', 'warning')
 
 
         if not resumes:
