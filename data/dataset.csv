@@ -1,6 +1,8 @@
 text,label
+
 "administration",Project Management
 "agile",Project Management
+"scrum",Project Management
 "feasibility analysis",Project Management
 "finance",Project Management
 "leader",Project Management
@@ -9,6 +11,7 @@ text,label
 "milestones",Project Management
 "planning",Project Management
 "project",Project Management
+"project charter",Project Management
 "risk management",Project Management
 "schedule",Project Management
 "stakeholders",Project Management
@@ -26,6 +29,45 @@ text,label
 "reporting",Project Management
 "technical",Project Management
 "motivation",Project Management
+"change management",Project Management
+"project lifecycle",Project Management
+"resource allocation",Project Management
+"budgeting",Project Management
+"risk assessment",Project Management
+"task prioritization",Project Management
+"conflict resolution",Project Management
+"performance tracking",Project Management
+"strategic planning",Project Management
+"portfolio management",Project Management
+"work breakdown structure",Project Management
+"pmo management",Project Management
+"scope management",Project Management
+"earned value management",Project Management
+"project initiation",Project Management
+"project closure",Project Management
+"meeting facilitation",Project Management
+"program management",Project Management
+"contract negotiation",Project Management
+"client relationship management",Project Management
+"gap analysis",Project Management
+"vendor management",Project Management
+"stakeholder analysis",Project Management
+"requirement gathering",Project Management
+"decision making",Project Management
+"business analysis",Project Management
+"operational planning",Project Management
+"product management",Project Management
+"service delivery",Project Management
+"timeline management",Project Management
+"issue tracking",Project Management
+"quality assurance",Project Management
+"deliverable tracking",Project Management
+"workflow automation",Project Management
+"compliance management",Project Management
+"data analysis",Project Management
+"benchmarking",Project Management
+"continuous improvement",Project Management
+
 
 "flask",Backend
 "laravel",Backend
@@ -41,7 +83,54 @@ text,label
 "non relational database",Backend
 "nosql",Backend
 "application programming interface",Backend
+"api development",Backend
 "object oriented programming",Backend
+"oop",Backend
+"microservices",Backend
+"rest api",Backend
+"graphql",Backend
+"asp.net",Backend
+"hibernate",Backend
+"spring boot",Backend
+"server-side scripting",Backend
+"java",Backend
+"php",Backend
+"python",Backend
+"node.js",Backend
+"rpc",Backend
+"grpc",Backend
+"serialization",Backend
+"deserialization",Backend
+"error handling",Backend
+"data validation",Backend
+"orm",Backend
+"sql optimization",Backend
+"data pipelines",Backend
+"cron jobs",Backend
+"task scheduling",Backend
+"worker threads",Backend
+"session management",Backend
+"authorization",Backend
+"authentication",Backend
+"token-based auth",Backend
+"jwt",Backend
+"oauth",Backend
+"webhooks",Backend
+"middlewares",Backend
+"caching",Backend
+"redis",Backend
+"memcached",Backend
+"rate limiting",Backend
+"cloud functions",Backend
+"event-driven programming",Backend
+"serverless architecture",Backend
+"containerization",Backend
+"docker-compose",Backend
+"load balancing",Backend
+"service discovery",Backend
+"circuit breaker",Backend
+"message queues",Backend
+
 
 "react",Frontend
 "angular",Frontend
@@ -55,16 +144,49 @@ text,label
 "css",Frontend
 "bootstrap",Frontend
 "javascript",Frontend
-"jquery",Frontend
 "xml",Frontend
 "dom manipulation",Frontend
 "json",Frontend
+"responsive design",Frontend
+"material-ui",Frontend
+"tailwind css",Frontend
+"scss",Frontend
+"typescript",Frontend
+"web components",Frontend
+"progressive web apps",Frontend
+"cross-browser compatibility",Frontend
+"seo optimization",Frontend
+"webpack",Frontend
+"babel",Frontend
+"grid systems",Frontend
+"flexbox",Frontend
+"svg",Frontend
+"canvas",Frontend
+"charts",Frontend
+"dynamic forms",Frontend
+"data binding",Frontend
+"event handling",Frontend
+"state management",Frontend
+"redux",Frontend
+"mobx",Frontend
+"form validation",Frontend
+"css animations",Frontend
+"media queries",Frontend
+"viewport handling",Frontend
+"font icons",Frontend
+"accessibility",Frontend
+"aria roles",Frontend
+"ui testing",Frontend
+"storyboards",Frontend
+"cypress",Frontend
+"playwright",Frontend
 
 "networking",Devops
 "tcp",Devops
 "udp",Devops
 "microsoft azure",Devops
 "amazon web services",Devops
+"aws lambda",Devops
 "alibaba cloud",Devops
 "google cloud",Devops
 "docker",Devops
@@ -82,3 +204,28 @@ text,label
 "operations",Devops
 "testing",Devops
 "troubleshooting",Devops
+"jenkins",Devops
+"ansible",Devops
+"puppet",Devops
+"terraform",Devops
+"cloudformation",Devops
+"elastic beanstalk",Devops
+"ci/cd pipelines",Devops
+"continuous monitoring",Devops
+"system logging",Devops
+"prometheus",Devops
+"grafana",Devops
+"splunk",Devops
+"nagios",Devops
+"elk stack",Devops
+"load testing",Devops
+"network monitoring",Devops
+"virtualization",Devops
+"hypervisors",Devops
+"container orchestration",Devops
+"service mesh",Devops
+"istio",Devops
+"helm",Devops
+"configuration management",Devops
+"release management",Devops
+"incident management",Devops

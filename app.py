@@ -48,7 +48,7 @@ def is_pdf_empty(filepath):
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 EMAIL_ADDRESS = '0422msrinivasa@gmail.com'  # Replace with your email
-EMAIL_PASSWORD = 'zmhi qqvy aepo hiny'  # Replace with your email app password
+EMAIL_PASSWORD = 'bell ptxc uebm qgdx'  # Replace with your email app password
 
 
 def send_email(to_email, subject, body):
@@ -157,9 +157,9 @@ def upload_file():
                 flash(f'{file.filename} is not a valid PDF file.', 'warning')
 
 
-        if not resumes:
-            flash('No resumes met the threshold criteria', 'warning')
-            return redirect(request.url)
+        # if not resumes:
+        #     flash('No resumes met the threshold criteria', 'warning')
+        #     return redirect(request.url)
 
         return render_template('screening.html', resumes=resumes, threshold=threshold, role=job_role)  # Pass threshold to template
 
